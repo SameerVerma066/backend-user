@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  mobile    String   @unique
+  email     String   @unique
+  rides     Ride[]
+}
+
+model Ride {
+  id            Int      @id @default(autoincrement())
+  destination   String
+  startingPoint String
+  trackingId    String   @unique
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id])
+  status        String   @default("pending")
+  driverId      Int?     // optional, as ride may not be assigned yet
+  otp           String?  // OTP for ride confirmation
+}
+
+model Admin {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+}
