@@ -67,10 +67,21 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 1. User Signup
 POST http://localhost:5000/api/users/signup
 Body (JSON):
+{
+  "name": "Alice",
+  "mobile": "9876543210",
+  "email": "alice@example.com"
+}
 
 2. User Book Ride
 POST http://localhost:5000/api/users/book-ride
 Body (JSON):
+{
+  "userId": 1,
+  "destination": "Airport",
+  "startingPoint": "Downtown",
+  "trackingId": "TRK123456"
+}
 
 (Replace userId with the actual user ID from signup response.)
 
@@ -92,6 +103,9 @@ GET http://localhost:5000/api/drivers/rides?driverId=1
 7. Driver Update Ride Status
 PUT http://localhost:5000/api/drivers/rides/1/status
 Body (JSON):
+{
+  "status": "started"
+}
 
 (Replace 1 with the actual ride ID)
 
